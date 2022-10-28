@@ -21,7 +21,5 @@
         </style>
     </head>
     <body class="antialiased">
-    
-    hola mundo
 </body>
 </html>
