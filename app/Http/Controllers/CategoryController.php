@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Provider;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
-class ProviderController extends Controller
+class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +14,8 @@ class ProviderController extends Controller
      */
     public function index()
     {
-        $providers = Provider::all();
-        return $providers;
+        $categories = Category::all();
+        return $categories;
     }
 
     /**
@@ -36,33 +36,33 @@ class ProviderController extends Controller
      */
     public function store(Request $request)
     {
-        $provider = new Provider();
-        $provider->name=$request->name;
-        $provider->last_name=$request->last_name;
-        $provider->cellphone=$request->cellphone;
-        $provider->enterprise_id=$request->enterprise_id;
-        $provider->save();
+        $request->validate([
+            "name" =>"required|string|min:8|max:25"
+        ]);
+        $category = new Category();
+        $category->name=$request->name;
+        $category->save();
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Provider  $provider
+     * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        $provider = Provider::find($id);
-        return provider;
+       $category = Category::find($id);
+       return $category;
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Provider  $provider
+     * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function edit(Provider $provider)
+    public function edit(Category $category)
     {
         //
     }
@@ -71,28 +71,25 @@ class ProviderController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Provider  $provider
+     * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Provider $provider)
+    public function update(Request $request, Category $category)
     {
-        $provider = Provider::findOrFail($request->id);
-        $provider->name=$request->name;
-        $provider->last_name=$request->last_name;
-        $provider->cellphone=$request->cellphone;
-        $provider->enterprise_id=$request->enterprise_id;
-        $provider->save();
-        return $provider;
+        $category = Category::findOrFail($request->id);
+        $category->name=$request->name;
+        $category->save();
+        return $category;
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Provider  $provider
+     * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        Provider::destroy($id);
+        Category::destroy($id);
     }
 }

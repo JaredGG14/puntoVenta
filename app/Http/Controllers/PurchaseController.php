@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Provider;
+use App\Models\Purchase;
 use Illuminate\Http\Request;
 
-class ProviderController extends Controller
+class PurchaseController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +14,8 @@ class ProviderController extends Controller
      */
     public function index()
     {
-        $providers = Provider::all();
-        return $providers;
+        $purchases = Purchase::all();
+        return $purchases;
     }
 
     /**
@@ -36,33 +36,31 @@ class ProviderController extends Controller
      */
     public function store(Request $request)
     {
-        $provider = new Provider();
-        $provider->name=$request->name;
-        $provider->last_name=$request->last_name;
-        $provider->cellphone=$request->cellphone;
-        $provider->enterprise_id=$request->enterprise_id;
-        $provider->save();
+        $purchase = new Purchase();
+        $purchase->total =$request->total;
+        $purchase->provider_id=$request->provider_id;
+        $purchase->save();
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Provider  $provider
+     * @param  \App\Models\Purchase  $purchase
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        $provider = Provider::find($id);
-        return provider;
+        $purchase = Purchase::find($id);
+        return $purchase;
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Provider  $provider
+     * @param  \App\Models\Purchase  $purchase
      * @return \Illuminate\Http\Response
      */
-    public function edit(Provider $provider)
+    public function edit(Purchase $purchase)
     {
         //
     }
@@ -71,28 +69,26 @@ class ProviderController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Provider  $provider
+     * @param  \App\Models\Purchase  $purchase
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Provider $provider)
+    public function update(Request $request, $id)
     {
-        $provider = Provider::findOrFail($request->id);
-        $provider->name=$request->name;
-        $provider->last_name=$request->last_name;
-        $provider->cellphone=$request->cellphone;
-        $provider->enterprise_id=$request->enterprise_id;
-        $provider->save();
-        return $provider;
+        $purchase = Purchase::findOrFail($request->id);
+        $purchase->total =$request->total;
+        $purchase->provider_id=$request->provider_id;
+        $purchase->save();
+        return $purchase;
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Provider  $provider
+     * @param  \App\Models\Purchase  $purchase
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        Provider::destroy($id);
+        Purchase::destroy($id);
     }
 }

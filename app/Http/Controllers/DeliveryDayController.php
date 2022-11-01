@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Provider;
+use App\Models\DeliveryDay;
 use Illuminate\Http\Request;
 
-class ProviderController extends Controller
+class DeliveryDayController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +14,8 @@ class ProviderController extends Controller
      */
     public function index()
     {
-        $providers = Provider::all();
-        return $providers;
+        $delivery = DeliveryDay::all();
+        return $delivery;
     }
 
     /**
@@ -25,7 +25,7 @@ class ProviderController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**
@@ -36,33 +36,31 @@ class ProviderController extends Controller
      */
     public function store(Request $request)
     {
-        $provider = new Provider();
-        $provider->name=$request->name;
-        $provider->last_name=$request->last_name;
-        $provider->cellphone=$request->cellphone;
-        $provider->enterprise_id=$request->enterprise_id;
-        $provider->save();
+        $deliverD = new DeliveryDay();
+        $deliverD->provider_id=$request->provider_id;
+        $deliverD->day=$request->day;
+        $deliverD->save();
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Provider  $provider
+     * @param  \App\Models\DeliveryDay  $deliveryDay
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        $provider = Provider::find($id);
-        return provider;
+        $deliveryD = DeliveryDay::find($id);
+        return $deliverD;
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Provider  $provider
+     * @param  \App\Models\DeliveryDay  $deliveryDay
      * @return \Illuminate\Http\Response
      */
-    public function edit(Provider $provider)
+    public function edit(DeliveryDay $deliveryDay)
     {
         //
     }
@@ -71,28 +69,26 @@ class ProviderController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Provider  $provider
+     * @param  \App\Models\DeliveryDay  $deliveryDay
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Provider $provider)
+    public function update(Request $request, DeliveryDay $deliveryDay)
     {
-        $provider = Provider::findOrFail($request->id);
-        $provider->name=$request->name;
-        $provider->last_name=$request->last_name;
-        $provider->cellphone=$request->cellphone;
-        $provider->enterprise_id=$request->enterprise_id;
-        $provider->save();
-        return $provider;
+        $deliverD = findOrFail($request->id);
+        $deliverD->provider_id=$request->provider_id;
+        $deliverD->day=$request->day;
+        $deliverD->save();
+        return $deliverD;
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Provider  $provider
+     * @param  \App\Models\DeliveryDay  $deliveryDay
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        Provider::destroy($id);
+        DeliveryDay::destroy($id);
     }
 }

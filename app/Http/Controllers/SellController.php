@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Provider;
+use App\Models\Sell;
 use Illuminate\Http\Request;
 
-class ProviderController extends Controller
+class SellController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +14,8 @@ class ProviderController extends Controller
      */
     public function index()
     {
-        $providers = Provider::all();
-        return $providers;
+        $sells = Sell::all();
+        return $sells;
     }
 
     /**
@@ -36,33 +36,31 @@ class ProviderController extends Controller
      */
     public function store(Request $request)
     {
-        $provider = new Provider();
-        $provider->name=$request->name;
-        $provider->last_name=$request->last_name;
-        $provider->cellphone=$request->cellphone;
-        $provider->enterprise_id=$request->enterprise_id;
-        $provider->save();
+        $sells = new Sell();
+        $sells->total = $request->total;
+        $sells->user_id = $request->user_id;
+        $sells->save();
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Provider  $provider
+     * @param  \App\Models\Sell  $sell
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        $provider = Provider::find($id);
-        return provider;
+        $sell = Sell::find($id);
+        return $sell;
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Provider  $provider
+     * @param  \App\Models\Sell  $sell
      * @return \Illuminate\Http\Response
      */
-    public function edit(Provider $provider)
+    public function edit(Sell $sell)
     {
         //
     }
@@ -71,28 +69,26 @@ class ProviderController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Provider  $provider
+     * @param  \App\Models\Sell  $sell
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Provider $provider)
+    public function update(Request $request, $id)
     {
-        $provider = Provider::findOrFail($request->id);
-        $provider->name=$request->name;
-        $provider->last_name=$request->last_name;
-        $provider->cellphone=$request->cellphone;
-        $provider->enterprise_id=$request->enterprise_id;
-        $provider->save();
-        return $provider;
+        $sell = Sell::findOrFail($request->id);
+        $sell->total = $request->total;
+        $sell->user_id = $request->user_id;
+        $sell->save();
+        return $sell;
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Provider  $provider
+     * @param  \App\Models\Sell  $sell
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        Provider::destroy($id);
+        Sell::destroy($id);
     }
 }

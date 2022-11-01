@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Provider;
+use App\Models\User;
 use Illuminate\Http\Request;
 
-class ProviderController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +14,8 @@ class ProviderController extends Controller
      */
     public function index()
     {
-        $providers = Provider::all();
-        return $providers;
+        $users = User::all();
+        return $users;
     }
 
     /**
@@ -36,33 +36,31 @@ class ProviderController extends Controller
      */
     public function store(Request $request)
     {
-        $provider = new Provider();
-        $provider->name=$request->name;
-        $provider->last_name=$request->last_name;
-        $provider->cellphone=$request->cellphone;
-        $provider->enterprise_id=$request->enterprise_id;
-        $provider->save();
+        $user = new User;
+        $user-> name = $request->name;
+        $user-> last_name = $request->last_name;
+        $user-> name = $request->name;
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Provider  $provider
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        $provider = Provider::find($id);
-        return provider;
+        $user = User::find($id);
+        return $user;
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Provider  $provider
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Provider $provider)
+    public function edit($id)
     {
         //
     }
@@ -71,28 +69,22 @@ class ProviderController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Provider  $provider
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Provider $provider)
+    public function update(Request $request, $id)
     {
-        $provider = Provider::findOrFail($request->id);
-        $provider->name=$request->name;
-        $provider->last_name=$request->last_name;
-        $provider->cellphone=$request->cellphone;
-        $provider->enterprise_id=$request->enterprise_id;
-        $provider->save();
-        return $provider;
+        
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Provider  $provider
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        Provider::destroy($id);
+        //
     }
 }
