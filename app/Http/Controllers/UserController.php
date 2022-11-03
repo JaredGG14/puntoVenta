@@ -116,9 +116,9 @@ class UserController extends Controller
     }
 
     public function specific(Request $request){
-
         $users = DB::table('users')
                     ->where('name', '=', $request->name)
+                    ->orWhere('id', '=', $request->id)
                     ->orWhere('last_name', '=', $request->last_name)
                     ->orWhere('email', '=' , $request->email)
                     ->orWhere('cellphone', '=', $request->cellphone)
