@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Enterprise;
 use Illuminate\Http\Request;
 
+
 class EnterpriseController extends Controller
 {
     /**
@@ -14,7 +15,8 @@ class EnterpriseController extends Controller
      */
     public function index()
     {
-        $enterprises = Entreprise::all();
+        
+        $enterprises = Enterprise::all();
         return $enterprises;
     }
 
@@ -36,6 +38,9 @@ class EnterpriseController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            "name" =>"required|string|min:5|max:25"
+        ]);
         $enterprise = new Enterprise();
         $enterprise->name = $request->name;
         $enterprise->save(); 
@@ -73,7 +78,11 @@ class EnterpriseController extends Controller
      */
     public function update(Request $request, Enterprise $enterprise)
     {
-        $enterprise = findOrFail($request->id);
+        $request->validate([
+            "name" =>"required|string|min:5|max:25",
+            "id" => "required"
+        ]);
+        $enterprise = Enterprise::findOrFail($request->id);
         $enterprise->name = $request->name;
         $enterprise->save();
         return $enterprise;

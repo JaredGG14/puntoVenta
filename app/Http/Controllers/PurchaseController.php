@@ -36,6 +36,10 @@ class PurchaseController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            "total" => "required|numeric|min:0",
+            "provider_id" => "required"
+        ]);
         $purchase = new Purchase();
         $purchase->total =$request->total;
         $purchase->provider_id=$request->provider_id;
@@ -74,6 +78,11 @@ class PurchaseController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            "id" => "required",
+            "total" => "required|numeric|min:0",
+            "provider_id" => "required"
+        ]);
         $purchase = Purchase::findOrFail($request->id);
         $purchase->total =$request->total;
         $purchase->provider_id=$request->provider_id;

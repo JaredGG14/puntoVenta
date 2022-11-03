@@ -36,6 +36,10 @@ class SellController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            "total" => "required|numeric|min:0",
+            "provider_id" => "required"
+        ]);
         $sells = new Sell();
         $sells->total = $request->total;
         $sells->user_id = $request->user_id;
@@ -74,6 +78,11 @@ class SellController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            "id" => "required",
+            "total" => "required|numeric|min:0",
+            "user_id" => "required"
+        ]);
         $sell = Sell::findOrFail($request->id);
         $sell->total = $request->total;
         $sell->user_id = $request->user_id;

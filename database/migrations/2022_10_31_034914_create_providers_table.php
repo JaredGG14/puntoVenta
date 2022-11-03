@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('last_name');
-            $table->string('cellphone')->unique();
+            $table->bigInteger('cellphone')->unique();
             $table->timestamps();
             $table->unsignedBigInteger('enterprise_id');
             $table->foreign('enterprise_id')

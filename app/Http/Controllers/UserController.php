@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -36,10 +37,21 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'name' => 'required|min:4|max:30',
+            'last_name' => 'required|min:4|max:30',
+            'email' => 'required|email',
+            'cellphone' => 'required|numeric|min:10|max:10',
+            'password' => 'required|min:8',
+            'userType_id' => 'required'
+            ]);
         $user = new User;
         $user-> name = $request->name;
         $user-> last_name = $request->last_name;
-        $user-> name = $request->name;
+        $user-> password = bcrypt($request->password);
+        $user-> cellphone = $request->cellphone;
+        $user-> userType_id = $request->userType_id;
+        $user->save();
     }
 
     /**
@@ -72,9 +84,24 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        
+        $request->validate([
+            'id' => 'required',
+            'name' => 'required|string|min:4|max:30',
+            'last_name' => 'required|string|min:4|max:30',
+            'email' => 'required|email',
+            'cellphone' => 'required|numeric|min:10|max:10',
+            'password' => 'required|min:8',
+            'userType_id' => 'required'
+            ]);
+        $user = User::findOrFail($request->id);
+        $user-> name = $request->name;
+        $user-> last_name = $request->last_name;
+        $user-> password = bcrypt($request->password);
+        $user-> cellphone = $request->cellphone;
+        $user-> userType_id = $request->userType_id;
+        $user->save();
     }
 
     /**
@@ -85,6 +112,18 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        User::destroy($id);
+    }
+
+    public function specific(Request $request){
+
+        $users = DB::table('users')
+                    ->where('name', '=', $request->name)
+                    ->orWhere('last_name', '=', $request->last_name)
+                    ->orWhere('email', '=' , $request->email)
+                    ->orWhere('cellphone', '=', $request->cellphone)
+                    ->orWhere('userType_id','=',$request->userType_id)
+                    ->get();
+        return $users;
     }
 }
