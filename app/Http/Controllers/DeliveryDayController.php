@@ -36,6 +36,10 @@ class DeliveryDayController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            "provider_id" =>"required",
+            "day" => "required"
+        ]);
         $deliverD = new DeliveryDay();
         $deliverD->provider_id=$request->provider_id;
         $deliverD->day=$request->day;
@@ -51,7 +55,7 @@ class DeliveryDayController extends Controller
     public function show($id)
     {
         $deliveryD = DeliveryDay::find($id);
-        return $deliverD;
+        return $deliveryD;
     }
 
     /**
@@ -72,9 +76,14 @@ class DeliveryDayController extends Controller
      * @param  \App\Models\DeliveryDay  $deliveryDay
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, DeliveryDay $deliveryDay)
+    public function update(Request $request)
     {
-        $deliverD = findOrFail($request->id);
+        $request->validate([
+            "id" => "required",
+            "provider_id" =>"required",
+            "day" => "required",
+        ]);
+        $deliverD = DeliveryDay::findOrFail($request->id);
         $deliverD->provider_id=$request->provider_id;
         $deliverD->day=$request->day;
         $deliverD->save();

@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\Sell;
+use App\Models\Usertype;
 
 class User extends Authenticatable
 {
@@ -23,7 +25,7 @@ class User extends Authenticatable
         'password',
         'email',
         'cellphone',
-        
+        'userType_id'
     ];
 
     /**
@@ -44,4 +46,12 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function sells(){
+        return $this->hasMany(Sell::class,'user_id','id');
+    }
+
+    public function usertypes(){
+        return $this->belongsTo(Usertype::class,'userType_id');
+    }
 }

@@ -36,6 +36,14 @@ class ProviderController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            "name" => "required|string|min:5|max:40",
+            "last_name" => "required|string|min:5|max:40",
+            "cellphone" => "required|numeric|min:0",
+            "quantity" => "required|numeric|min:0",
+            "provider_id" => "required",
+            "category_id" => "required"
+        ]);
         $provider = new Provider();
         $provider->name=$request->name;
         $provider->last_name=$request->last_name;
@@ -53,7 +61,7 @@ class ProviderController extends Controller
     public function show($id)
     {
         $provider = Provider::find($id);
-        return provider;
+        return $provider;
     }
 
     /**
@@ -76,6 +84,15 @@ class ProviderController extends Controller
      */
     public function update(Request $request, Provider $provider)
     {
+        $request->validate([
+            "id" => "required",
+            "name" => "required|string|min:5|max:40",
+            "last_name" => "required|string|min:5|max:40",
+            "cellphone" => "required|numeric|min:0",
+            "quantity" => "required|numeric|min:0",
+            "provider_id" => "required",
+            "category_id" => "required"
+        ]);
         $provider = Provider::findOrFail($request->id);
         $provider->name=$request->name;
         $provider->last_name=$request->last_name;

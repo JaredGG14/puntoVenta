@@ -36,6 +36,9 @@ class UsertypeController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'userType' => 'requiered'
+        ]);
         $userT = new UserType();
         $userT->userType = $request->userType;
         $userT->save();
@@ -71,8 +74,12 @@ class UsertypeController extends Controller
      * @param  \App\Models\Usertype  $usertype
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
+        $request->validate([
+            'id' => 'requiered',
+            'userType' => 'requiered'
+        ]);
         $userT = UserType::findOrFail($request->id);
         $userT->userType = $request->userType;
         $userT->save();
@@ -89,4 +96,5 @@ class UsertypeController extends Controller
     {
         UserType::destroy($id);
     }
+
 }

@@ -90,6 +90,15 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
+        $request->validate([
+            "id" => "required",
+            "description" => "required|string|min:0|max:150",
+            "boughtPrice" => "required|numeric|min:0",
+            "profitPercent" => "required|numeric|min:0",
+            "quantity" => "required|numeric|min:0",
+            "provider_id" => "required",
+            "category_id" => "required"
+        ]);
         $product = Product::findOrFail($request->id);
         $product->descrption=$request->description;
         $product->bougthPrice=$request->boughtPrice;
