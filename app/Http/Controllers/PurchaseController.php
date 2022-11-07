@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Purchase;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PurchaseController extends Controller
 {
@@ -79,7 +80,6 @@ class PurchaseController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            "id" => "required",
             "total" => "required|numeric|min:0",
             "provider_id" => "required"
         ]);
@@ -99,5 +99,14 @@ class PurchaseController extends Controller
     public function destroy($id)
     {
         Purchase::destroy($id);
+    }
+
+    public function specific(Request $request){
+        $purchases = DB::table('purchases')
+                    ->where('total', '=', $request->total)
+                    ->orWhere('id', '=', $request->id)
+                    ->orWhere('provider_id', '=', $request->provider_id)
+                    ->get();
+        return $purchases;
     }
 }

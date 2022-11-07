@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\DeliveryDay;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class DeliveryDayController extends Controller
 {
@@ -76,10 +77,9 @@ class DeliveryDayController extends Controller
      * @param  \App\Models\DeliveryDay  $deliveryDay
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
-        $request->validate([
-            "id" => "required",
+        $request->validate([  
             "provider_id" =>"required",
             "day" => "required",
         ]);
@@ -99,5 +99,14 @@ class DeliveryDayController extends Controller
     public function destroy($id)
     {
         DeliveryDay::destroy($id);
+    }
+
+    public function specific(Request $request){
+        $days = DB::table('delivery_days')
+                    ->where('day', '=', $request->day)
+                    ->orWhere('id', '=', $request->id)
+                    ->orWhere('provider_id','=',$request->provider_id)
+                    ->get();
+        return $days;
     }
 }

@@ -6,6 +6,7 @@ use App\Models\Product;
 use App\Models\Category;
 use App\Models\Provider;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
@@ -88,10 +89,9 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(Request $request, $id)
     {
-        $request->validate([
-            "id" => "required",
+        $request->validate([           
             "description" => "required|string|min:0|max:150",
             "boughtPrice" => "required|numeric|min:0",
             "profitPercent" => "required|numeric|min:0",
@@ -119,5 +119,18 @@ class ProductController extends Controller
     public function destroy($id)
     {
         Product::destroy($id);
+    }
+
+    public function specific(Request $request){
+        $products = DB::table('users')
+                    ->where('description', '=', $request->description)
+                    ->orWhere('bougthPrice', '=', $request->boughtPrice)
+                    ->orWhere('profitPercent', '=', $request->profitPercent)
+                    ->orWhere('quantity', '=' , $request->quantity)
+                    ->orWhere('id', '=' , $request->id)
+                    ->orWhere('provider_id', '=', $request->provider_id)
+                    ->orWhere('category_id','=',$request->category_id)
+                    ->get();
+        return $products;
     }
 }

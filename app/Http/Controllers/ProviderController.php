@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Provider;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ProviderController extends Controller
 {
@@ -85,7 +86,6 @@ class ProviderController extends Controller
     public function update(Request $request, Provider $provider)
     {
         $request->validate([
-            "id" => "required",
             "name" => "required|string|min:5|max:40",
             "last_name" => "required|string|min:5|max:40",
             "cellphone" => "required|numeric|min:0",
@@ -111,5 +111,16 @@ class ProviderController extends Controller
     public function destroy($id)
     {
         Provider::destroy($id);
+    }
+
+    public function specific(Request $request){
+        $providers = DB::table('providers')
+                    ->where('name', '=', $request->name)
+                    ->orWhere('id', '=', $request->id)
+                    ->orWhere('last_name', '=', $request->last_name)
+                    ->orWhere('cellphone', '=', $request->cellphone)
+                    ->orWhere('enterprise_id','=',$request->enterprise_id)
+                    ->get();
+        return $providers;
     }
 }

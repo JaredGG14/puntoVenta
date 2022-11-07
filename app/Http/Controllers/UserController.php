@@ -84,10 +84,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
         $request->validate([
-            'id' => 'required',
             'name' => 'required|string|min:4|max:30',
             'last_name' => 'required|string|min:4|max:30',
             'email' => 'required|email',

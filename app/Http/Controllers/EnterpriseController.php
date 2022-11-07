@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Enterprise;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 
 class EnterpriseController extends Controller
@@ -76,11 +77,10 @@ class EnterpriseController extends Controller
      * @param  \App\Models\Enterprise  $enterprise
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Enterprise $enterprise)
+    public function update(Request $request, $id)
     {
         $request->validate([
-            "name" =>"required|string|min:5|max:25",
-            "id" => "required"
+            "name" =>"required|string|min:5|max:25"
         ]);
         $enterprise = Enterprise::findOrFail($request->id);
         $enterprise->name = $request->name;
@@ -97,5 +97,13 @@ class EnterpriseController extends Controller
     public function destroy($id)
     {
         Enterprise::destroy($id);
+    }
+
+    public function specific(Request $request){
+        $users = DB::table('enterprise')
+                    ->where('name', '=', $request->name)
+                    ->orWhere('id', '=', $request->id)
+                    ->get();
+        return $users;
     }
 }

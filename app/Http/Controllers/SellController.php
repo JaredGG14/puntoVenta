@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Sell;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class SellController extends Controller
 {
@@ -79,7 +80,6 @@ class SellController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            "id" => "required",
             "total" => "required|numeric|min:0",
             "user_id" => "required"
         ]);
@@ -99,5 +99,14 @@ class SellController extends Controller
     public function destroy($id)
     {
         Sell::destroy($id);
+    }
+
+    public function specific(Request $request){
+        $sells = DB::table('sells')
+                    ->where('total', '=', $request->total)
+                    ->orWhere('id', '=', $request->id)
+                    ->orWhere('user_id', '=', $request->user_id)
+                    ->get();
+        return $sells;
     }
 }

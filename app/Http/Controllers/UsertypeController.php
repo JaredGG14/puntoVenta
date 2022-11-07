@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Usertype;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class UsertypeController extends Controller
 {
@@ -74,10 +75,9 @@ class UsertypeController extends Controller
      * @param  \App\Models\Usertype  $usertype
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
         $request->validate([
-            'id' => 'requiered',
             'userType' => 'requiered'
         ]);
         $userT = UserType::findOrFail($request->id);
@@ -95,6 +95,14 @@ class UsertypeController extends Controller
     public function destroy($id)
     {
         UserType::destroy($id);
+    }
+
+    public function specific(Request $request){
+        $types = DB::table('usertypes')
+                    ->where('userType', '=', $request->userType)
+                    ->orWhere('id', '=', $request->id)
+                    ->get();
+        return $types;
     }
 
 }
