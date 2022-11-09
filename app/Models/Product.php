@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Provider;
 use App\Models\Category;
+use App\Models\Cart;
 
 class Product extends Model
 {

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cart;
+use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CartController extends Controller
 {
@@ -14,7 +16,8 @@ class CartController extends Controller
      */
     public function index()
     {
-        //
+        $carts = Cart::all();
+        return $carts;
     }
 
     /**
@@ -35,7 +38,10 @@ class CartController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $cart = new Cart();
+        $cart->product_id=$request->product_id;
+        $cart->user_id=1;
+        $cart->save();
     }
 
     /**
@@ -44,9 +50,10 @@ class CartController extends Controller
      * @param  \App\Models\Cart  $cart
      * @return \Illuminate\Http\Response
      */
-    public function show(Cart $cart)
+    public function show($id)
     {
-        //
+        $cart = Cart::find($id);
+        return $cart;
     }
 
     /**
@@ -67,9 +74,12 @@ class CartController extends Controller
      * @param  \App\Models\Cart  $cart
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Cart $cart)
+    public function update(Request $request, $id)
     {
-        //
+        $cart = Cart::findOrFail($request->id);
+        $cart->name=$request->name;
+        $cart->save();
+        return $cart;
     }
 
     /**
@@ -78,8 +88,15 @@ class CartController extends Controller
      * @param  \App\Models\Cart  $cart
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Cart $cart)
+    public function destroy($id)
     {
-        //
+        Cart::destroy($id);
+    }
+    
+    public function specific(Request $request){
+        $categories = DB::table('carts')
+                    ->where('product_id', '=', $request->product_id)
+                    ->get();
+        return $categories;
     }
 }

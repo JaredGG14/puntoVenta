@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use App\Models\Sell;
 use App\Models\Usertype;
+use App\Models\Cart;
 
 class User extends Authenticatable
 {
