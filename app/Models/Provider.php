@@ -34,4 +34,7 @@ class Provider extends Model
     public function enterprises(){
         return $this->belongsTo(Enterprise::class,'enterprise_id');
     }
+    public function carts(){
+        return $this->belongsTo(Cart::class,'cart_id');
+    }
 }
