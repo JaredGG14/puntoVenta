@@ -20,6 +20,7 @@ return new class extends Migration
             $table->integer('profitPercent');
             $table->integer('quantity');
             $table->unsignedBigInteger('provider_id');
+            $table->timestamps();
             $table->foreign('provider_id')
                     ->references('id')->on('providers')
                     ->onDelete('cascade')->onUpdate('cascade');
