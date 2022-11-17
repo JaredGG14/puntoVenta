@@ -10,9 +10,8 @@
     </head>
     <body>
         <div id="application">
-            </div>
+        </div>
             
-            <sript src="{{asset('js/app.jsx')}}"></script>  
             <script src="https://unpkg.com/react/umd/react.production.min.js" crossorigin></script>
     
             <script
