@@ -9,13 +9,8 @@ function NavBar() {
       <Navbar bg="dark" variant="dark">
         <Container>
           <Navbar.Brand as = {Link} to="/puntoVenta/public/" >
-            <img
-              src="resources\images\LogoPV.png"
-              width="30"
-              height="30"
-              className="d-inline-block align-top"
-              alt="React Bootstrap logo"
-            /></Navbar.Brand>
+          
+          </Navbar.Brand>
           <Nav className="me-auto">
             <Nav.Link as = {Link} to="/puntoVenta/public/products">Productos</Nav.Link>
             <Nav.Link as = {Link} to="/puntoVenta/public/providers">Proveedores</Nav.Link>

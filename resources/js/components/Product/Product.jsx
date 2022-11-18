@@ -22,7 +22,8 @@ const ShowProducts = () => {
 
     return (
         <div>
-            <table className='table table-striped'>
+    
+            <table class="table table-dark table-striped">
                 <thead className="bg-primary text-white">
                     <tr>
                         <th>Description</th>
