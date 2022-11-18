@@ -8,8 +8,9 @@
         @viteReactRefresh
         @vite('resources/js/app.jsx')
     </head>
-    <body>
-        <div id="application">
+    <body style="background-color: #212529">
+        
+        <div id="application" background="black">
         </div>
             
             <script src="https://unpkg.com/react/umd/react.production.min.js" crossorigin></script>
