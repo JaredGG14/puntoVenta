@@ -9,7 +9,7 @@ function NavBar() {
       <Navbar bg="dark" variant="dark">
         <Container>
           <Navbar.Brand as = {Link} to="/puntoVenta/public/" >
-          
+            <img src="./images/Logo_PV.png" width="45px" height="45px"></img>
           </Navbar.Brand>
           <Nav className="me-auto">
             <Nav.Link as = {Link} to="/puntoVenta/public/products">Productos</Nav.Link>
