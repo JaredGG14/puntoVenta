@@ -14,11 +14,12 @@ function NavBar() {
             <img src="./images/Logo_PV.png" width="45px" height="45px"></img>
           </Navbar.Brand>
           <Nav className="me-auto">
-            <Nav.Link as = {Link} to="/puntoVenta/public/products">Productos</Nav.Link>
-            <Nav.Link as = {Link} to="/puntoVenta/public/providers">Proveedores</Nav.Link>
-            <Nav.Link as = {Link} to="/puntoVenta/public/DeliveryDay">Día de Entrega</Nav.Link>
-            <Nav.Link as = {Link} to="/puntoVenta/public/Sells">Ventas</Nav.Link>
-            <Nav.Link as = {Link} to="/puntoVenta/public/Purchases">Compras</Nav.Link>
+            <Nav.Link as = {Link} to="/puntoVenta/public/products">Products</Nav.Link>
+            <Nav.Link as = {Link} to="/puntoVenta/public/providers">Providers</Nav.Link>
+            <Nav.Link as = {Link} to="/puntoVenta/public/deliveryDay">Delivery Day</Nav.Link>
+            <Nav.Link as = {Link} to="/puntoVenta/public/sells">Sells</Nav.Link>
+            <Nav.Link as = {Link} to="/puntoVenta/public/purchases">Purchases</Nav.Link>
+            <Nav.Link as = {Link} to="/puntoVenta/public/users">Users</Nav.Link>
           </Nav>
         </Container>
       </Navbar>
