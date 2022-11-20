@@ -7,34 +7,34 @@ import { Modal, Button } from "react-bootstrap";
 
 const endpoint = 'http://localhost/puntoVenta/public/api'
 
-const ShowProducts = () => {
-    const [products, setProducts] = useState([])
+const ShowProviders = () => {
+    const [providers, setProviders] = useState([])
     useEffect(() => {
         getAllProducts()
     }, [])
 
-    const [productId, setProductId] = useState([])
+    const [providerId, setProviderId] = useState([])
     useEffect(() => {
         getProductId()
     }, [])
 
-    const getAllProducts = async () => {
-        const response = await axios.get(`${endpoint}/products`)
-        setProducts(response.data)
+    const getAllProviders = async () => {
+        const response = await axios.get(`${endpoint}/providers`)
+        setProviders(response.data)
     }
-    const getProductId = async (id) => {
-        const response = await axios.get(`${endpoint}/product/${id}`)
-        setProductId(response.data)
+    const getProviderId = async (id) => {
+        const response = await axios.get(`${endpoint}/provider/${id}`)
+        setProviderId(response.data)
     }
-    const deleteProduct = async (id) => {
-        axios.delete(`${endpoint}/product/${id}`)
-        getAllProducts()
+    const deleteProvider = async (id) => {
+        axios.delete(`${endpoint}/provider/${id}`)
+        getAllProviders()
     }
 
     const [dialog, setDialog] = useState({
         message: "",
         handle: false,
-        nameProduct: ""
+        nameProvider: ""
     });
 
     const [show, setShow] = useState(false);
@@ -54,7 +54,7 @@ const ShowProducts = () => {
                     <Button variant="secondary" onClick={handleClose}>
                         Close
                     </Button>
-                    <Button variant="primary" onClick={() => deleteProduct(id)}>
+                    <Button variant="primary" onClick={() => deleteProvider(id)}>
                         Save Changes
                     </Button>
                 </Modal.Footer>
@@ -68,10 +68,11 @@ const ShowProducts = () => {
             <table class="table table-dark table-borderless">
                 <thead className="bg-primary text-white">
                     <tr className="align-top">
-                        <th>Description</th>
-                        <th>Bought Price</th>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
                         <th>Profit Percent</th>
-                        <th>Quantity</th>
+                        <th>Telefono</th>
+                        <th>Telefono</th>
                         <th>
                             <div className="input-group input-group-sm">
                                 <div className="input-group-text">
@@ -135,4 +136,4 @@ const ShowProducts = () => {
 
 
 
-export default ShowProducts
+export default ShowProviders
