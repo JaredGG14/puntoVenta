@@ -48,6 +48,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    protected $with = ['sells'];
+
     public function sells(){
         return $this->hasMany(Sell::class,'user_id','id');
     }

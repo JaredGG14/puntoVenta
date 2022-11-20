@@ -12,6 +12,9 @@ class Cart extends Model
         'product_id',
         'user_id'
     ];
+
+    protected $with = ['products', 'users'];
+
     public function products(){
         return $this->hasMany(Product::class,'product_id','id');
     }

@@ -11,9 +11,12 @@ class DeliveryDay extends Model
     use HasFactory;
     protected $fillable=[
         'provider_id',
-        'day'];
+        'day'
+    ];
+
+    protected $with = 'providers';
 
     public function providers(){
-        $this->belongsTo(Provider::class, 'providers_id');
+        $this->belongsTo(Provider::class, 'providers_id', 'id');
     }
 }

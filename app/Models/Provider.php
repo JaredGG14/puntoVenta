@@ -19,6 +19,7 @@ class Provider extends Model
         'enterprise_id'
     ];
 
+
     public function products(){
         return $this->hasMany(Product::class,'provider_id','id');
     }
@@ -30,6 +31,8 @@ class Provider extends Model
     public function delivery_days(){
         return $this->hasMany(DeliveryDay::class,'provider_id','id');
     }
+
+    protected $with = ['enterprises'];
 
     public function enterprises(){
         return $this->belongsTo(Enterprise::class,'enterprise_id');

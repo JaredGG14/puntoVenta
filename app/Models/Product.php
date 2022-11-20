@@ -20,15 +20,17 @@ class Product extends Model
         'category_id',
     ];
 
+    protected $with = ['providers', 'categories', 'carts'];
+
     public function providers(){
-        return $this->belongsTo(Provider::class,'provider_id');
+        return $this->belongsTo(Provider::class,'provider_id', 'id');
     }
 
     public function categories(){
-        return $this->belongsTo(Category::class,'category_id');
+        return $this->belongsTo(Category::class,'category_id', 'id');
     }
 
     public function carts(){
-        return $this->belongsTo(Cart::class,'product_id');
+        return $this->belongsTo(Cart::class,'product_id', 'id');
     }
 }
