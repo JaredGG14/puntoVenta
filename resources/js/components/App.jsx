@@ -4,6 +4,7 @@ import {BrowserRouter, Routes, Route} from 'react-router-dom'
 import NavBar from './NavBar';
 import Cart from './Cart/Cart';
 import Product from './Product/Product';
+import Provider from './Provider/Provider';
 
 
 function App() {
@@ -12,7 +13,8 @@ function App() {
       <NavBar/>
       <div className='App'>
               <Routes>
-                  <Route path="/puntoVenta/public/" element={<Product/>}/>
+                  <Route path="/puntoVenta/public/products" element={<Product/>}/>
+                  <Route path="/puntoVenta/public/providers" element={<Provider/>}/>
               </Routes>
       </div>
     </>
