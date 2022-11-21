@@ -20,7 +20,7 @@ class Product extends Model
         'category_id',
     ];
 
-    protected $with = ['providers', 'categories'];
+    protected $with = ['providers', 'categories', 'carts'];
 
     public function providers(){
         return $this->belongsTo(Provider::class,'provider_id', 'id');

@@ -18,6 +18,7 @@ function App() {
                   <Route path="/puntoVenta/public/providers" element={<Provider />}/>
                   <Route path="/puntoVenta/public/sells" element={<Sell />}/>
                   <Route path="/puntoVenta/public/users" element={<User />}/>
+                  <Route path="/puntoVenta/public/" element={<Product/>}/>
               </Routes>
       </div>
     </>

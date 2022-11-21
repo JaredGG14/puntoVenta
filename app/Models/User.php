@@ -49,11 +49,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    
 
-    public function sells(){
-        return $this->hasMany(Sell::class,'user_id','id');
-    }
 
     protected $with = ['usertypes'];
     public function usertypes(){
