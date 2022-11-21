@@ -7,34 +7,34 @@ import { Modal, Button } from "react-bootstrap";
 
 const endpoint = 'http://localhost/puntoVenta/public/api'
 
-const ShowProviders = () => {
-    const [providers, setProviders] = useState([])
+const ShowSells = () => {
+    const [sells, setSells] = useState([])
     useEffect(() => {
-        getAllProviders()
+        getAllSells()
     }, [])
 
-    const [providerId, setProviderId] = useState([])
+    const [sellId, setSellId] = useState([])
     useEffect(() => {
-        getProviderId()
+        getSellId()
     }, [])
 
-    const getAllProviders = async () => {
-        const response = await axios.get(`${endpoint}/providers`)
-        setProviders(response.data)
+    const getAllSells = async () => {
+        const response = await axios.get(`${endpoint}/sells`)
+        setSells(response.data)
     }
-    const getProviderId = async (id) => {
-        const response = await axios.get(`${endpoint}/provider/${id}`)
-        setProviderId(response.data)
+    const getSellId = async (id) => {
+        const response = await axios.get(`${endpoint}/sell/${id}`)
+        setSellId(response.data)
     }
-    const deleteProvider = async (id) => {
-        axios.delete(`${endpoint}/provider/${id}`)
-        getAllProviders()
+    const deleteSell = async (id) => {
+        axios.delete(`${endpoint}/sell/${id}`)
+        getAllSells()
     }
 
     const [dialog, setDialog] = useState({
         message: "",
         handle: false,
-        nameProvider: ""
+        nameSell: ""
     });
 
     const [show, setShow] = useState(false);
@@ -70,8 +70,7 @@ const ShowProviders = () => {
                 <tr className="align-center">
                         <th>
                             <div class="align-center">
-                                <h1>Providers</h1>
-
+                                <h1>Sells</h1>
                             </div>
                         </th>
                         <th>
@@ -85,10 +84,8 @@ const ShowProviders = () => {
                         </th>
                     </tr>
                     <tr className="align-top">
-                        <th>Name</th>
-                        <th>Last Name</th>
-                        <th>Cellphone</th>
-                        <th>Enterprise</th>
+                        <th>Total</th>
+                        <th>User</th>
                         <th>
                             <div className="input-group input-group-sm">
                                 <div className="input-group-text">
@@ -97,23 +94,20 @@ const ShowProviders = () => {
                                     </svg>
                                 </div>
                                 <input type="text" size className="form-control form-control-sm" placeholder="Search Product..." aria-label="Search Product" aria-describedby="button-addon2" />
-    
                             </div>
                         </th>
                     </tr>
                 </thead>
                 <tbody>
                 
-                    {providers.map((provider) => (
-                        <tr key={provider.id}>
-                            <td> {provider.name} </td>
-                            <td> {provider.last_name} </td>
-                            <td> {provider.cellphone} </td>
-                            <td> {provider.enterprises.name} </td>
+                    {sells.map((sell) => (
+                        <tr key={sell.id}>
+                            <td> $ {sell.total} </td>
+                            <td> {sell.users.name} </td>
                             <td>
                                 <div class="row g-3">
                                     <div class="col-md-3">
-                                        <Link to={`puntoVenta/public/provider/edit/${provider.id}`} className='btn btn-outline-info'>
+                                        <Link to={`puntoVenta/public/sell/edit/${sell.id}`} className='btn btn-outline-info'>
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
                                                 <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
                                                 <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
@@ -123,7 +117,7 @@ const ShowProviders = () => {
     
                                     <div class="col-md-3">
     
-                                        <button className='btn btn-outline-danger' onClick={() => handleDelete(provider.id, provider.name)}  >
+                                        <button className='btn btn-outline-danger' onClick={() => handleDelete(sell.id, sell.name)}  >
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
                                                 <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
                                                 <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
@@ -144,4 +138,4 @@ const ShowProviders = () => {
 
 
 
-export default ShowProviders;
+export default ShowSells;

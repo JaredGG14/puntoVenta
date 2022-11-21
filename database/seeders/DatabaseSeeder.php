@@ -11,6 +11,7 @@ use App\Models\Category;
 use App\Models\Enterprise;
 use App\Models\Product;
 use App\Models\User;
+use App\Models\Sell;
 
 class DatabaseSeeder extends Seeder
 {
@@ -34,5 +35,6 @@ class DatabaseSeeder extends Seeder
         Provider::factory(15)->create();
         Product::factory(30)->create();
         User::factory(20)->create();
+        Sell::factory(20)->create();
     }
 }
