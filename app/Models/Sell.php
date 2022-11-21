@@ -15,8 +15,8 @@ class Sell extends Model
     ];
 
     protected $with = ['users'];
-
     public function users(){
-        return $this->belongsTo(User::class,'user_id', 'id');
+         
+        return $this->belongsTo(User::class,'user_id');
     }
 }

@@ -26,7 +26,8 @@ class User extends Authenticatable
         'password',
         'email',
         'cellphone',
-        'userType_id'
+        'userType_id', 
+        'imagen'
     ];
 
     /**
@@ -48,12 +49,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    protected $with = ['sells'];
 
-    public function sells(){
-        return $this->hasMany(Sell::class,'user_id','id');
-    }
 
+    protected $with = ['usertypes'];
     public function usertypes(){
         return $this->belongsTo(Usertype::class,'userType_id');
     }
