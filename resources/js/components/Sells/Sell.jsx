@@ -13,55 +13,35 @@ const ShowSells = () => {
         getAllSells()
     }, [])
 
-    const [sellId, setSellId] = useState([])
-    useEffect(() => {
-        getSellId()
-    }, [])
-
     const getAllSells = async () => {
         const response = await axios.get(`${endpoint}/sells`)
         setSells(response.data)
     }
-    const getSellId = async (id) => {
-        const response = await axios.get(`${endpoint}/sell/${id}`)
-        setSellId(response.data)
-    }
+    
     const deleteSell = async (id) => {
         axios.delete(`${endpoint}/sell/${id}`)
         getAllSells()
+        getAllSells()
     }
 
-    const [dialog, setDialog] = useState({
-        message: "",
-        handle: false,
-        nameSell: ""
-    });
+    const [users, setUsers] = useState([])
+    useEffect(() => {
+        getAllUsers()
+    }, [])
 
-    const [show, setShow] = useState(false);
-    const handleClose = () => setShow(false);
-
-    const handleDelete = (id, name) => {
-        const handleShow = () => setShow(true);
-        <>
-            <Modal show={show} onHide={handleClose}>
-                <Modal.Header closeButton>
-                    <Modal.Title>Modal heading</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClose}>
-                        Close
-                    </Button>
-                    <Button variant="primary" onClick={() => deleteProvider(id)}>
-                        Save Changes
-                    </Button>
-                </Modal.Footer>
-            </Modal>
-        </>
+    const getAllUsers = async () => {
+        const response = await axios.get(`${endpoint}/users`)
+        setUsers(response.data)
     }
 
+    //create
+    const [total, setTotal] = useState(0)
+
+    const store = async (e) => {
+        e.preventDefault()
+        await axios.post(`${endpoint}/sell`, { total: total, user_id: user })
+        getAllSells();
+    }
 
     return (
         <div class="container-sm">

@@ -17,11 +17,10 @@ const ShowProducts = () => {
         setProducts(response.data)
     }
 
-    
-
     //Delete
     const deleteProduct = async (id) => {
         axios.delete(`${endpoint}/product/${id}`)
+        getAllProducts()
         getAllProducts()
     }
 
@@ -46,16 +45,10 @@ const ShowProducts = () => {
         setCategories(response.data)
     }
 
-    
-
     //Modal Menu
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-
-    const [showEdit, setShowEdit] = useState(false);
-    const handleCloseEdit = () => setShowEdit(false);
-    const handleShowEdit = () => setShowEdit(true);
 
     //create
     const [description, setDescription] = useState('')
@@ -81,12 +74,6 @@ const ShowProducts = () => {
         setShow(false);
         getAllProducts();
     }
-
-    const update = async (e) => {
-        e.preventDefault()
-        await axios.post(`${endpoint}/product/${id}`, { description: description, boughtPrice: boughtPrice, profitPercent: profitPercent, quantity: quantity, provider_id: provider_id, category_id: category_id })
-    }
-    
     
     return (
         <div class="container-sm">
@@ -147,7 +134,7 @@ const ShowProducts = () => {
                                         </Link>
                                     </div>
                                     <div class="col-md-3">
-                                        <Link onClick={handleShowEdit} className='btn btn-outline-info'>
+                                        <Link onClick={handleShow} className='btn btn-outline-info'>
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
                                                 <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
                                                 <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
@@ -181,85 +168,6 @@ const ShowProducts = () => {
                     <Modal.Body>
                         <div>
                             <form onSubmit={store}>
-                                <div className="row g-4">
-                                    <div className='col-md-8'>
-                                        <label className='form-label'>Description</label>
-                                        <input
-                                            value={description}
-                                            onChange={(e) => setDescription(e.target.value)}
-                                            type='text'
-                                            className='form-control'
-                                        />
-                                    </div>
-                                    <div className='col-md-4'>
-                                        <label className='form-label'>Quantity</label>
-                                        <input
-                                            value={quantity}
-                                            onChange={(e) => setQuantity(e.target.value)}
-                                            type='number'
-                                            className='form-control'
-                                        />
-                                    </div>
-                                </div>
-                                <br />
-                                <div className="row g-3">
-                                    <div className='col-md-6'>
-                                        <label className='form-label'>Bought Price</label>
-                                        <input
-                                            value={boughtPrice}
-                                            onChange={(e) => setBoughtPrice(e.target.value)}
-                                            type='number'
-                                            className='form-control'
-                                        />
-                                    </div>
-                                    <div className='col-md-6'>
-                                        <label className='form-label'>Profit Percent</label>
-                                        <input
-                                            value={profitPercent}
-                                            onChange={(e) => setProfitPercent(e.target.value)}
-                                            type='number'
-                                            className='form-control'
-                                        />
-                                    </div>
-                                </div>
-                                <br />
-                                <div className='row g-4'>
-                                    <div className='col-md-6'>
-                                        <label className='form-label'>Provider</label>
-                                        <select class="form-select" id="inputGroupSelect01" onChange={(e) => setProvider(e.target.value)}>
-                                            <option selected>Choose a Provider...</option>
-                                            {providers.map((provider) => (
-                                                <option value={provider.id}>{provider.name}</option>
-                                            ))}
-
-                                        </select>
-                                    </div>
-                                    <div className='col-md-6'>
-                                        <label className='form-label'>Category</label>
-                                        <select class="form-select" id="inputGroupSelect01" onChange={(e) => setCategory(e.target.value)}>
-                                            <option selected>Choose a Category...</option>
-                                            {categories.map((category) => (
-                                                <option value={category.id}>{category.name}</option>
-                                            ))}
-
-                                        </select>
-                                    </div>
-                                </div>
-                                <br />
-                                <button type='submit' className='btn btn-primary'>Store</button>
-                            </form>
-                        </div>
-                    </Modal.Body>
-                </Modal>
-            </>
-            <>
-                <Modal show={showEdit} onHide={handleCloseEdit}>
-                    <Modal.Header closeButton>
-                        <Modal.Title><h3> Edit Product </h3></Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                        <div>
-                            <form onSubmit={update}>
                                 <div className="row g-4">
                                     <div className='col-md-8'>
                                         <label className='form-label'>Description</label>
