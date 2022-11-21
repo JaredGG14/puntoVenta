@@ -50,8 +50,8 @@ class ProductController extends Controller
 
         
         $products = new Product();
-        $products->descrption=$request->description;
-        $products->bougthPrice=$request->boughtPrice;
+        $products->description=$request->description;
+        $products->boughtPrice=$request->boughtPrice;
         $products->profitPercent=$request->profitPercent;
         $products->quantity=$request->quantity;
         $products->provider_id=$request->provider_id;

@@ -10,6 +10,7 @@ import Provider from './Provider/Provider';
 function App() {
   return (
     <>
+    <NavBar/>
       <div className='App'>
               <Routes>
                   <Route path="/puntoVenta/public/" element={<Product/>}/>

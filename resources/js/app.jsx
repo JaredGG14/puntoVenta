@@ -9,7 +9,6 @@ const root = ReactDOM.createRoot(document.getElementById('application'));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <NavBar/>
       <App>
       </App>
     </BrowserRouter>
